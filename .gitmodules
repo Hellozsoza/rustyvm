@@ -1,3 +1,0 @@
-[submodule "kBuild"]
- path = kBuild
- url = https://github.com/VirtualBox/kbuild.git
