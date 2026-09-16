@@ -1,3 +1,0 @@
-[build-system]
-requires = ["setuptools","setuptools_scm","swig"]
-build-backend = "setuptools.build_meta"

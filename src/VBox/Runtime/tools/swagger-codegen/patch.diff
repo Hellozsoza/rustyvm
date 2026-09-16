@@ -1,9 +1,0 @@
-diff --git a/modules/swagger-codegen/src/main/resources/META-INF/services/io.swagger.codegen.CodegenConfig b/modules/swagger-codegen/src/main/resources/META-INF/services/io.swagger.codegen.CodegenConfig
-index db374ce9d..1ab7cb6cc 100644
---- a/modules/swagger-codegen/src/main/resources/META-INF/services/io.swagger.codegen.CodegenConfig
-+++ b/modules/swagger-codegen/src/main/resources/META-INF/services/io.swagger.codegen.CodegenConfig
-@@ -88,3 +88,4 @@ io.swagger.codegen.languages.TypeScriptNodeClientCodegen
- io.swagger.codegen.languages.UndertowCodegen
- io.swagger.codegen.languages.ZendExpressivePathHandlerServerCodegen
- io.swagger.codegen.languages.KotlinServerCodegen
-+io.swagger.codegen.languages.IprtClientCodegen

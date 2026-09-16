@@ -1,9 +1,0 @@
-[Unit]
-Description=VirtualBox ValidationKit UsbTestService Daemon
-After=network.target
-
-[Service]
-ExecStart=/root/validationkit/linux/amd64/UsbTestService --config /etc/usbtest.conf --foreground
-
-[Install]
-WantedBy=multi-user.target

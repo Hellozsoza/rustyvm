@@ -1,9 +1,0 @@
-#!/bin/bash
-die() {
-   echo "$0: Fatal error: $*"
-   exit 1;
-}
-echo > /tmp/tbox_updater_bonsai.running
-cd /var/www/tindertux/tinderbox/server || die cd failed
-./tbox_bonsai_update.pl --start 7 --end
-echo $? > /tmp/tbox_updater_bonsai.last
