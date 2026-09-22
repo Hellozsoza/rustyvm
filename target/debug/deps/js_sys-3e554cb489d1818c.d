@@ -1,0 +1,11 @@
+/home/hellozsoza/rustyvm/target/debug/deps/js_sys-3e554cb489d1818c.d: /home/hellozsoza/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/js-sys-0.3.105/src/lib.rs /home/hellozsoza/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/js-sys-0.3.105/src/futures/mod.rs /home/hellozsoza/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/js-sys-0.3.105/src/futures/jspi.rs /home/hellozsoza/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/js-sys-0.3.105/src/futures/queue.rs /home/hellozsoza/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/js-sys-0.3.105/src/futures/task/singlethread.rs
+
+/home/hellozsoza/rustyvm/target/debug/deps/libjs_sys-3e554cb489d1818c.rlib: /home/hellozsoza/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/js-sys-0.3.105/src/lib.rs /home/hellozsoza/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/js-sys-0.3.105/src/futures/mod.rs /home/hellozsoza/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/js-sys-0.3.105/src/futures/jspi.rs /home/hellozsoza/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/js-sys-0.3.105/src/futures/queue.rs /home/hellozsoza/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/js-sys-0.3.105/src/futures/task/singlethread.rs
+
+/home/hellozsoza/rustyvm/target/debug/deps/libjs_sys-3e554cb489d1818c.rmeta: /home/hellozsoza/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/js-sys-0.3.105/src/lib.rs /home/hellozsoza/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/js-sys-0.3.105/src/futures/mod.rs /home/hellozsoza/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/js-sys-0.3.105/src/futures/jspi.rs /home/hellozsoza/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/js-sys-0.3.105/src/futures/queue.rs /home/hellozsoza/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/js-sys-0.3.105/src/futures/task/singlethread.rs
+
+/home/hellozsoza/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/js-sys-0.3.105/src/lib.rs:
+/home/hellozsoza/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/js-sys-0.3.105/src/futures/mod.rs:
+/home/hellozsoza/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/js-sys-0.3.105/src/futures/jspi.rs:
+/home/hellozsoza/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/js-sys-0.3.105/src/futures/queue.rs:
+/home/hellozsoza/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/js-sys-0.3.105/src/futures/task/singlethread.rs:

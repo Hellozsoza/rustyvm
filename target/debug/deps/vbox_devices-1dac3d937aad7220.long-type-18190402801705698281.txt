@@ -1,0 +1,1 @@
+parking_lot::lock_api::MutexGuard<'_, parking_lot::RawMutex, Vec<Box<(dyn Device + 'static)>>>
