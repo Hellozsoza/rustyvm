@@ -1,0 +1,12 @@
+[package]
+name = "vbox-core"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+thiserror = "1"
+
+[lib]
+name = "vbox_core"
+path = "src/lib.rs"
+

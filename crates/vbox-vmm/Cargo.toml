@@ -1,0 +1,21 @@
+[package]
+name = "vbox-vmm"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "vbox_vmm"
+path = "src/lib.rs"
+
+[dependencies]
+vbox-core = { path = "../vbox-core" }
+vbox-runtime = { path = "../vbox-runtime" }
+parking_lot = "0.12"
+smallvec = "1"
+serde = { version = "1", features = ["derive"] }
+bincode = "1.3"
+log = "0.4"
+thiserror = "1"
+
+[features]
+default = []

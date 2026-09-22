@@ -1,0 +1,244 @@
+/* VirtualBox Browser Edition Styles */
+
+:root {
+    --bg-primary: #0a0a1a;
+    --bg-secondary: #1a1a2e;
+    --bg-tertiary: #16213e;
+    --text-primary: #e0e0e0;
+    --text-secondary: #888;
+    --accent: #4fc3f7;
+    --accent-dim: #0f3460;
+    --border: #333;
+    --danger: #ef5350;
+    --success: #66bb6a;
+    --warning: #ffa726;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: var(--bg-primary);
+    font-family: 'Consolas', 'Monaco', monospace;
+    color: var(--text-primary);
+}
+
+#vbox-console {
+    width: 100vw;
+    height: 100vh;
+    display: block;
+    image-rendering: pixelated;
+}
+
+#vbox-toolbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 44px;
+    background: linear-gradient(180deg, var(--bg-secondary), var(--bg-tertiary));
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    gap: 10px;
+    z-index: 200;
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+#vbox-toolbar button {
+    padding: 6px 14px;
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    border: 1px solid var(--accent-dim);
+    cursor: pointer;
+    border-radius: 3px;
+    font-size: 12px;
+    font-family: inherit;
+    transition: all 0.15s ease;
+}
+
+#vbox-toolbar button:hover {
+    background: var(--accent-dim);
+    border-color: var(--accent);
+}
+
+#vbox-toolbar button:active {
+    background: var(--accent);
+    color: var(--bg-primary);
+}
+
+#vbox-toolbar button.active {
+    background: var(--accent);
+    color: var(--bg-primary);
+}
+
+#vbox-status {
+    color: var(--accent);
+    font-size: 12px;
+    margin-left: auto;
+    opacity: 0.8;
+}
+
+#vbox-settings {
+    position: fixed;
+    top: 54px;
+    right: 10px;
+    background: rgba(20, 20, 35, 0.96);
+    color: var(--text-primary);
+    padding: 20px;
+    border-radius: 8px;
+    display: none;
+    z-index: 100;
+    min-width: 320px;
+    max-height: calc(100vh - 80px);
+    overflow-y: auto;
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+}
+
+#vbox-settings.show {
+    display: block;
+    animation: slideIn 0.2s ease-out;
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+#vbox-settings h3 {
+    margin-bottom: 16px;
+    color: var(--accent);
+    font-size: 16px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 8px;
+}
+
+#vbox-settings label {
+    display: block;
+    margin: 8px 0 4px;
+    font-size: 11px;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+#vbox-settings input,
+#vbox-settings select,
+#vbox-settings textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 8px;
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 13px;
+}
+
+#vbox-settings input:focus,
+#vbox-settings select:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px rgba(79, 195, 247, 0.15);
+}
+
+.vbox-console-overlay {
+    position: fixed;
+    bottom: 60px;
+    left: 10px;
+    background: rgba(10, 10, 26, 0.85);
+    color: var(--accent);
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 11px;
+    z-index: 100;
+    max-height: 180px;
+    overflow-y: auto;
+    max-width: 400px;
+    border: 1px solid var(--border);
+}
+
+.vbox-console-overlay .log-entry {
+    padding: 2px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.vbox-console-overlay .log-time {
+    color: var(--text-secondary);
+    margin-right: 6px;
+}
+
+.vbox-console-overlay .log-error {
+    color: var(--danger);
+}
+
+.vbox-console-overlay .log-success {
+    color: var(--success);
+}
+
+.vbox-fullscreen #vbox-console {
+    width: 100vw;
+    height: 100vh;
+}
+
+.vbox-fullscreen #vbox-toolbar {
+    display: none;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--accent-dim);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent);
+}
+
+/* Notification toast */
+.vbox-toast {
+    position: fixed;
+    top: 54px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    padding: 10px 20px;
+    border-radius: 4px;
+    border: 1px solid var(--accent);
+    z-index: 300;
+    animation: toastIn 0.3s ease-out;
+    font-size: 13px;
+}
+
+@keyframes toastIn {
+    from { opacity: 0; transform: translateX(-50%) translateY(-10px); }
+    to { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+.vbox-toast.error {
+    border-color: var(--danger);
+    color: var(--danger);
+}
+
+.vbox-toast.success {
+    border-color: var(--success);
+    color: var(--success);
+}

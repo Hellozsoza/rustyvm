@@ -1,0 +1,3 @@
+[workspace]
+members = ["crates/vbox-core", "crates/vbox-runtime", "crates/vbox-vmm", "crates/vbox-devices", "crates/vbox-storage", "crates/vbox-main", "crates/vbox-web"]
+resolver = "2"
