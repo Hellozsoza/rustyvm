@@ -1,0 +1,24 @@
+VirtualBox icons: copyright Oracle and/or its affiliates, GPL-3.0-only.
+See VirtualBox-COPYING and the original image sources in
+the VirtualBox source repository at
+https://github.com/Hellozsoza/rustyvm/tree/virtualbox/src/VBox/Frontends/VirtualBox/images.
+
+v86 0.5.470: BSD-2-Clause. Its LICENSE is copied to vendor/v86-LICENSE.
+Source: https://github.com/copy/v86/tree/6db8b157974dbaf1b54d2c2ec12dd71ddc1891e9
+
+The v86 binary incorporates Berkeley SoftFloat Release 3e:
+Copyright 2011-2017 The Regents of the University of California.
+See SoftFloat-LICENSE for its BSD terms and disclaimer.
+
+The v86 binary incorporates Zstandard decompression:
+Copyright (c) 2016-2020, Yann Collet, Facebook, Inc. All rights reserved.
+See zstd-LICENSE for the selected BSD terms and disclaimer.
+
+The v86 floppy implementation includes QEMU code under MIT terms.
+See v86-floppy-LICENSE for the original notices and disclaimer.
+
+SeaBIOS and SeaVGABIOS: LGPL-3.0. See SeaBIOS-LICENSE and VirtualBox-COPYING.
+Corresponding source: https://github.com/coreboot/seabios/tree/rel-1.16.2
+Build script and configurations:
+https://github.com/copy/v86/tree/6db8b157974dbaf1b54d2c2ec12dd71ddc1891e9/bios
+See the distributed README.md for exact sources and build instructions.

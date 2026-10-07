@@ -1,0 +1,16 @@
+{
+  "name": "virtualbox-browser",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "license": "GPL-3.0-only",
+  "engines": { "node": ">=24 <25" },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "start": "node scripts/serve.mjs",
+    "test": "node --test tests/unit.test.mjs",
+    "test:browser": "playwright test"
+  },
+  "dependencies": { "v86": "0.5.470" },
+  "devDependencies": { "@playwright/test": "1.63.0" }
+}

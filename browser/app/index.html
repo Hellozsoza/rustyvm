@@ -1,0 +1,69 @@
+<!doctype html>
+<!-- $Id$ | VirtualBox browser manager | SPDX-License-Identifier: GPL-3.0-only -->
+<!-- Copyright (C) 2026 RustyVM contributors. See COPYING for GPLv3 terms. -->
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>VirtualBox Browser</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <header class="titlebar"><img src="./icons/tools_global_32px.png" alt=""><strong>VirtualBox Manager</strong><span>Browser edition · WebAssembly</span></header>
+    <nav class="menubar" aria-label="Application menu">
+        <button id="menu-new">Machine: New…</button><button id="menu-settings">Settings…</button><button id="about">Help / Compatibility</button>
+    </nav>
+    <div class="toolbar" aria-label="Machine actions">
+        <button id="new"><img src="./icons/vm_new_32px.png" alt="">New</button>
+        <button id="settings"><img src="./icons/vm_settings_32px.png" alt="">Settings</button>
+        <button id="clone"><img src="./icons/vm_clone_32px.png" alt="">Clone</button>
+        <button id="remove"><img src="./icons/vm_delete_32px.png" alt="">Remove</button>
+        <span class="separator"></span>
+        <button id="start"><img src="./icons/vm_start_32px.png" alt="">Start</button>
+        <button id="snapshot"><img src="./icons/snapshot_take_32px.png" alt="">Take Snapshot</button>
+    </div>
+    <main>
+        <aside><div class="sidebar-title">Tools <span>Local machines</span></div><div id="machines" role="listbox" aria-label="Virtual machines"></div><p class="storage-note">Stored on this browser, on this origin. Export important disks and states before clearing site data.</p></aside>
+        <section class="workspace">
+            <div class="tabbar" role="tablist"><button id="tab-details" role="tab" aria-selected="true">Details</button><button id="tab-console" role="tab" aria-selected="false">Console</button><button id="tab-snapshots" role="tab" aria-selected="false">Snapshots</button></div>
+            <section id="details" class="panel"></section>
+            <section id="console" class="panel" hidden>
+                <div class="console-toolbar"><strong id="console-title">Guest display</strong><button id="pause">Pause</button><button id="reset">Reset</button><button id="save">Save State &amp; Close</button><button id="poweroff">Power Off</button><button id="fullscreen">Full Screen</button><button id="cad">Ctrl+Alt+Del</button></div>
+                <p class="hint">Click the display to send keyboard and mouse input to the guest. Escape releases input. One VM runs at a time.</p>
+                <div id="screen" tabindex="0" aria-label="Guest display"><div class="text-screen"></div><canvas style="display: none"></canvas></div>
+                <label class="serial-label" for="serial">Serial port COM1 output</label><textarea id="serial" readonly rows="6" spellcheck="false"></textarea>
+                <form id="send-keys"><input id="guest-text" aria-label="Text to type in guest" placeholder="Type text using the guest’s US keyboard layout"><button>Send to guest</button></form>
+            </section>
+            <section id="snapshots" class="panel" hidden></section>
+        </section>
+    </main>
+    <footer><span id="status" role="status">Opening local storage…</span><span>32-bit x86 · Software emulation · Offline networking</span></footer>
+    <dialog id="editor">
+        <form id="config-form">
+            <h2 id="editor-title">Create Virtual Machine</h2>
+            <label>Name<input name="name" required maxlength="120" value="New machine"></label>
+            <label>Operating system<select name="os"><option>Other</option><option>Linux</option><option>Windows</option></select></label>
+            <label>Base memory (MB)<input name="memory" type="number" min="16" max="512" step="1" value="64" required></label>
+            <label>Boot device<select name="boot"><option value="demo">Built-in x86 demo</option><option value="floppy">Floppy</option><option value="cdrom">Optical drive (ISO)</option><option value="disk">Hard disk (raw IMG / VDI)</option></select></label>
+            <fieldset><legend>Storage media</legend>
+                <label>Floppy image<input name="floppy" type="file" accept=".img,.ima"></label>
+                <label>Optical disk<input name="cdrom" type="file" accept=".iso"></label>
+                <label>Hard disk<input name="disk" type="file" accept=".img,.bin,.raw,.vdi"></label>
+                <label>Create a blank hard disk (MB; 0 = keep current)<input name="blank" type="number" min="0" max="512" value="0"></label>
+            </fieldset>
+            <p class="hint">Media remains local. Standalone VDI 1.1 images are converted to raw; snapshots and parent-linked disks are rejected. 512 MB limit per image.</p>
+            <p id="form-error" role="alert"></p>
+            <div class="dialog-actions"><button type="button" id="cancel">Cancel</button><button type="submit">Save</button></div>
+        </form>
+    </dialog>
+    <dialog id="compatibility">
+        <h2>VirtualBox Browser edition</h2>
+        <p>A browser VM manager using VirtualBox’s original icons and a familiar desktop layout. Guest instructions run locally in the v86 WebAssembly emulator.</p>
+        <p>This is an alternative browser frontend and execution engine, not a compiled port of Oracle VirtualBox. The original Qt GUI and VirtualBox hypervisor do not run here.</p>
+        <ul><li>Supported: compatible 16/32-bit x86 guests, VGA display, keyboard/mouse, local ISO/floppy/raw/standalone VDI media, saved states, snapshots, disk export.</li><li>Unavailable: 64-bit guests, multicore, VT-x/AMD-V, VirtualBox Guest Additions, USB/PCI passthrough, native bridged/NAT networking, VirtualBox saved states, OVA/OVF, VMDK, and 3D acceleration.</li><li>Performance and guest compatibility depend on v86. No guest internet access is configured. Guest media is never uploaded.</li><li>Disk writes are persisted on Power Off, Save State, and snapshots. Closing the tab can lose recent writes; explicitly save before leaving.</li></ul>
+        <p>Engine: v86 0.5.470 (BSD-2-Clause). BIOS: SeaBIOS / VGA BIOS from its pinned upstream revision. See the frontend README for source and license information.</p>
+        <button id="close-about">Close</button>
+    </dialog>
+    <script type="module" src="./app.mjs"></script>
+</body>
+</html>
