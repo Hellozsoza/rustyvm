@@ -19,6 +19,22 @@ import { promisify } from "node:util";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const dist = `${root}dist`;
+// Vercel serves checked-in Rust/WASM artifacts; a Rust toolchain is only needed
+// to rebuild them. When engine sources are present, reject stale binaries too.
+const engineManifest = JSON.parse(await readFile(`${root}app/rusty64/manifest.json`, "utf8"));
+for (const [file, expected] of Object.entries(engineManifest.artifacts)) {
+    const actual = createHash("sha256").update(await readFile(`${root}app/rusty64/${file}`)).digest("hex");
+    if (actual !== expected) throw new Error(`Rust engine artifact checksum mismatch: ${file}`);
+}
+let engineSourcesPresent = false;
+try { await readFile(`${root}../engine/Cargo.toml`); engineSourcesPresent = true; }
+catch (error) { if (error.code !== "ENOENT") throw error; }
+if (engineSourcesPresent) {
+    for (const [file, expected] of Object.entries(engineManifest.sources)) {
+        const actual = createHash("sha256").update(await readFile(`${root}../engine/${file}`)).digest("hex");
+        if (actual !== expected) throw new Error(`Rust engine source changed: ${file}. Run npm run build:engine first.`);
+    }
+}
 await mkdir(`${dist}/vendor`, { recursive: true });
 await mkdir(`${dist}/icons`, { recursive: true });
 await cp(`${root}app`, dist, { recursive: true });

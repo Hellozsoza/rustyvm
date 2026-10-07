@@ -11,7 +11,7 @@
 <body>
     <header class="titlebar"><img src="./icons/tools_global_32px.png" alt=""><strong>VirtualBox Manager</strong><span>Browser edition · WebAssembly</span></header>
     <nav class="menubar" aria-label="Application menu">
-        <button id="menu-new">Machine: New…</button><button id="menu-settings">Settings…</button><button id="about">Help / Compatibility</button>
+        <button id="menu-new">Machine: New…</button><button id="menu-settings">Settings…</button><button id="about">Help / Compatibility</button><a href="./rusty64/">Rust x86-64 engine (experimental)</a>
     </nav>
     <div class="toolbar" aria-label="Machine actions">
         <button id="new"><img src="./icons/vm_new_32px.png" alt="">New</button>
@@ -63,6 +63,7 @@
         <p>This is an alternative browser frontend and execution engine, not a compiled port of Oracle VirtualBox. The original Qt GUI and VirtualBox hypervisor do not run here.</p>
         <ul><li>Supported: compatible 16/32-bit x86 guests, VGA display, keyboard/mouse, local ISO/floppy/raw/standalone VDI media, saved states, snapshots, disk export.</li><li>Unavailable: 64-bit guests, multicore, VT-x/AMD-V, VirtualBox Guest Additions, USB/PCI passthrough, native bridged/NAT networking, VirtualBox saved states, OVA/OVF, VMDK, and 3D acceleration.</li><li>Performance and guest compatibility depend on v86. No guest internet access is configured. Guest media is never uploaded.</li><li>Disk writes are persisted on Power Off, Save State, and snapshots. Closing the tab can lose recent writes; explicitly save before leaving.</li></ul>
         <p>Engine: v86 0.5.470 (BSD-2-Clause). BIOS: SeaBIOS / VGA BIOS from its pinned upstream revision. See the frontend README for source and license information.</p>
+        <p><a href="./rusty64/">Rusty64</a> is a separate Rust engine compiled to WebAssembly. It executes a subset of x86-64 instructions in freestanding ELF64 programs. It cannot boot an operating system or replace v86 for ISO-based VMs yet.</p>
         <button id="close-about">Close</button>
     </dialog>
     <script type="module" src="./app.mjs"></script>

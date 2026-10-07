@@ -6,6 +6,13 @@ icons and familiar layout. It does **not** compile the VirtualBox hypervisor,
 IPRT, XPCOM, or Qt GUI to WASM; the VM execution engine is replaced by v86.
 Native VirtualBox's build and public APIs are unchanged.
 
+An additional **Rusty64** engine is now implemented in Rust and compiled to WASM.
+Open **Rust x86-64 engine (experimental)** in the manager to run its compiled
+64-bit demo or load a freestanding ELF64 executable. It has a subset of x86-64
+integer instructions, register inspection, and sparse guest addressing up to
+8 GiB (128 MiB maximum committed pages). It cannot boot Arch Linux or ISO media
+yet. See [engine documentation](../engine/README.md) for implementation and gaps.
+
 ## Build and run
 
 Use Node.js 24, npm, and curl. From this directory:
@@ -35,6 +42,12 @@ the checksum-verified BIOS files. Initial installation needs
 `registry.npmjs.org` and `raw.githubusercontent.com`; running `dist/` needs
 no external downloads. Node fetch does not automatically use the cloud proxy,
 so the build uses curl with TLS verification enabled.
+
+The build also verifies and copies the compiled Rust engine in
+`app/rusty64/`. These artifacts are committed, so the Vercel build still needs
+only Node, npm and curl. Rebuilding Rust source requires Rust 1.90.0, the
+`wasm32-unknown-unknown` target and GNU binutils; use `npm run build:engine`
+before `npm run build` after engine changes.
 
 ## Using the manager
 

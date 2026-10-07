@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Rusty64 · Experimental Rust engine</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <header><a href="../">← VM manager</a><strong>Rusty64</strong><span>Rust → WebAssembly · x86-64 interpreter</span></header>
+    <main>
+        <h1>Experimental 64-bit engine</h1>
+        <p class="notice">Runs freestanding ELF64 programs using a subset of x86-64 instructions. <strong>Arch Linux and ISO boot are not supported yet.</strong> Firmware, paging, interrupts, and PC devices are still needed.</p>
+        <section aria-label="Program controls">
+            <label>Guest address space (MiB)<input id="memory" type="number" min="16" max="8192" step="1" value="8192"></label>
+            <p class="hint">Up to 8 GiB of sparse address space; up to 128 MiB of written pages. The demo accesses memory above 4 GiB. This is separate from the v86 VM settings.</p>
+            <div class="actions"><button id="demo">Load 64-bit demo</button><label class="file">Load ELF64<input id="file" type="file" accept=".elf,.bin"></label><a href="./demo.elf" download>Download demo ELF</a></div>
+            <p class="hint">ELF uploads stay in this browser. Maximum file size: 16 MiB. Supported host calls: write to stdout/stderr and exit. General Linux applications require additional instructions and system calls.</p>
+            <div class="actions"><button id="run" disabled>Run</button><button id="pause" disabled>Pause</button><button id="step" disabled>Step</button><button id="reset" disabled>Reset</button></div>
+        </section>
+        <p id="status" role="status">Loading the Rust WebAssembly engine…</p>
+        <section><h2>Program output</h2><pre id="output" aria-label="Program output"></pre></section>
+        <section><h2>CPU registers</h2><p id="metrics"></p><dl id="registers"></dl></section>
+    </main>
+    <script type="module" src="./ui.mjs"></script>
+</body>
+</html>

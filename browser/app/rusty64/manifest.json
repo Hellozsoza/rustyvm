@@ -1,0 +1,20 @@
+{
+  "engine": "rusty64",
+  "version": "0.1.0",
+  "rust": "1.90.0",
+  "artifacts": {
+    "rusty64.wasm": "65c8203392805703681a5f43281ae937a69f769c0d0667ba43bbd77115d869c6",
+    "demo.elf": "765704c866dabe8aaf979d404d04d00554f02a16e09b7285cf58cc92c9dc6baa"
+  },
+  "sources": {
+    "Cargo.toml": "279755fcf309690d76703ca05212cdf427195a402144d4711ba1494e8b8f9a6c",
+    "Cargo.lock": "f24f6c3cb0a1255bd143d1c7eb8e8bc7a1c53a2dbebd549cf401c063c5682082",
+    "rust-toolchain.toml": "702c6907dd43eab8ce6907811a46284e43b5bf5bc3fa54f59a6204992cc08ac8",
+    "src/lib.rs": "5b874f1f6749a8a8e91e3682ea53d52c309e50591679b4f5157add0c5f6ae5fa",
+    "src/memory.rs": "932c3ccd0ab2893d7b5d0a48d749527df264f855d124763bf44ae4dcd01861d2",
+    "src/elf.rs": "f89548b91faf3d61934a421cefa7d0a0fa3c25bd7728b95a4e4e5edb39f50523",
+    "src/wasm.rs": "2018d24e28184529143b629bf12e2d47c6a31b80280263e77aa94d31cc496fee",
+    "guests/demo.S": "f34c987821219784ea1d69ae2d2fbfcb392b70e9daca1e8535181475f3d6cb2d",
+    "build.mjs": "df2a08f5c25c77b7cc2cc4369b5e0459b0fea22913de11b5826c8e23ad47ead2"
+  }
+}
