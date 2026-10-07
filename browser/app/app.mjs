@@ -214,7 +214,7 @@ $("config-form").onsubmit = event => {
                     media[kind] = await readMedia(form.elements[kind].files[0], kind);
             const blank = Number(form.elements.blank.value);
             if (!Number.isInteger(blank) || blank < 0 || blank * 1048576 > MAX_MEDIA_BYTES)
-                throw new Error("Blank disk size must be an integer from 0 to 512 MB.");
+                throw new Error("Blank disk size must be an integer from 0 to 2048 MB.");
             if (blank && form.elements.disk.files[0])
                 throw new Error("Choose either a disk image or a new blank disk.");
             if (blank)

@@ -76,7 +76,7 @@ RAM settings support up to 8 GB. This pinned v86 engine uses signed 32-bit memor
 | Storage | Local ISO, standard floppy, sector-aligned raw disks |
 | VDI | Standalone fixed/dynamic VDI 1.1 converted to raw; block mapping validated |
 | Persistence | VM list/settings in cookies; IndexedDB for RAM/CPU state, media, snapshots, raw disk export |
-| RAM/media | 16–8192 MB RAM settings (current engine runs up to 2047 MB); maximum 512 MB per image; full images held in memory |
+| RAM/media | 16–8192 MB RAM settings (current engine runs up to 2047 MB); maximum 2 GB per image; full images held in memory |
 | Guest networking | Disconnected; no NAT, relay, or bridged interface configured |
 | Unsupported | 64-bit, multicore, VT-x/AMD-V, USB/PCI passthrough, 3D acceleration |
 | Native integration | No VirtualBox Guest Additions, shared folders, host clipboard, XPCOM API |
@@ -139,3 +139,5 @@ verifies both SHA-256 checksums. No environment variables or secrets are needed.
 
 From an authenticated Vercel CLI session, run `vercel deploy --prod` in this
 directory. Vercel authentication stays within its supported CLI.
+
+Official Arch Linux installation ISOs require x86-64 and cannot boot in this engine. Arch Linux 32 provides separate 32-bit media; compatibility still depends on v86. Images up to 2 GB may be attached, but loading, cloning, saving, and snapshots require additional browser memory and storage quota.

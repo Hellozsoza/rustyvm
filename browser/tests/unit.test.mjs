@@ -12,7 +12,7 @@
  */
 import test from "node:test";
 import assert from "node:assert/strict";
-import { validateConfig, validateRuntimeMemory, vdiToRaw, readMedia } from "../app/model.mjs";
+import { validateConfig, validateRuntimeMemory, vdiToRaw, readMedia, MAX_MEDIA_BYTES } from "../app/model.mjs";
 
 function vdi(type = 1) {
     const data = new ArrayBuffer(2048);
@@ -65,7 +65,7 @@ test("rejects truncated, oversized, linked and corrupt VDI input before allocati
         assert.throws(() => vdiToRaw(input));
     }
     const huge = vdi(); new DataView(huge).setBigUint64(368, 1n << 60n, true);
-    assert.throws(() => vdiToRaw(huge), /at most 512 MB/);
+    assert.throws(() => vdiToRaw(huge), /at most 2 GB/);
 });
 
 test("VDI blocks with metadata prefixes and partial final blocks", () => {
@@ -89,4 +89,16 @@ test("rejects unsupported formats, empty media and invalid floppy/sector sizes",
     await assert.rejects(readMedia(new File([new Uint8Array(512)], "floppy.img"), "floppy"), /standard/);
     const media = await readMedia(new File([vdi()], "disk.vdi"), "disk");
     assert.equal(media.data.byteLength, 1024);
+});
+
+test("media above 512 MB is accepted and the 2 GB limit is checked before reading", async () => {
+    let reads = 0;
+    const image = { name: "installer.iso", size: 1500 * 1024 * 1024,
+        arrayBuffer: async () => { reads++; return new ArrayBuffer(1024); } };
+    const media = await readMedia(image, "cdrom");
+    assert.equal(media.name, "installer.iso");
+    assert.equal(reads, 1);
+    await assert.rejects(readMedia({ ...image, size: MAX_MEDIA_BYTES + 1 }, "cdrom"), /at most 2 GB/);
+    assert.equal(reads, 1);
+    await assert.rejects(readMedia({ ...image, arrayBuffer: async () => { throw new RangeError(); } }, "cdrom"), /could not load this image/);
 });

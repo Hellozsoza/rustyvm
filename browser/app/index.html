@@ -50,9 +50,9 @@
                 <label>Floppy image<input name="floppy" type="file" accept=".img,.ima"></label>
                 <label>Optical disk<input name="cdrom" type="file" accept=".iso"></label>
                 <label>Hard disk<input name="disk" type="file" accept=".img,.bin,.raw,.vdi"></label>
-                <label>Create a blank hard disk (MB; 0 = keep current)<input name="blank" type="number" min="0" max="512" value="0"></label>
+                <label>Create a blank hard disk (MB; 0 = keep current)<input name="blank" type="number" min="0" max="2048" value="0"></label>
             </fieldset>
-            <p class="hint">Media remains local. Standalone VDI 1.1 images are converted to raw; snapshots and parent-linked disks are rejected. 512 MB limit per image.</p>
+            <p class="hint">Media remains local. Standalone VDI 1.1 images are converted to raw; snapshots and parent-linked disks are rejected. 2 GB limit per image. Images are loaded into browser memory. Official Arch Linux ISOs require a 64-bit CPU; this engine supports only 16/32-bit guests.</p>
             <p id="form-error" role="alert"></p>
             <div class="dialog-actions"><button type="button" id="cancel">Cancel</button><button type="submit">Save</button></div>
         </form>

@@ -20,7 +20,7 @@ export function validateRuntimeMemory(memory) {
         throw new Error(`This v86 engine supports at most ${ENGINE_MAX_RAM_MB} MB guest RAM. The ${memory} MB setting is saved, but requires a different engine to run.`);
 }
 
-export const MAX_MEDIA_BYTES = 512 * 1024 * 1024;
+export const MAX_MEDIA_BYTES = 2048 * 1024 * 1024;
 
 /** Validate untrusted configuration before allocating guest resources. */
 export function validateConfig(input) {
@@ -51,7 +51,7 @@ export function vdiToRaw(buffer) {
         throw new Error("VDI images with parent linkage are not supported.");
     const sizeBig = view.getBigUint64(368, true);
     if (sizeBig === 0n || sizeBig > BigInt(MAX_MEDIA_BYTES) || sizeBig % 512n)
-        throw new Error("VDI virtual disk must be sector-aligned and at most 512 MB.");
+        throw new Error("VDI virtual disk must be sector-aligned and at most 2 GB.");
     const size = Number(sizeBig);
     const blockSize = u32(376), extra = u32(380), count = u32(384), allocated = u32(388);
     const map = u32(340), data = u32(344);
@@ -78,8 +78,10 @@ export function vdiToRaw(buffer) {
 /** Read bounded local media; never upload it to a server. */
 export async function readMedia(file, kind) {
     if (file.size === 0 || file.size > MAX_MEDIA_BYTES)
-        throw new Error("Each media image must contain data and be at most 512 MB.");
-    let data = await file.arrayBuffer();
+        throw new Error("Each media image must contain data and be at most 2 GB.");
+    let data;
+    try { data = await file.arrayBuffer(); }
+    catch { throw new Error("The browser could not load this image into memory. Try a smaller image or free memory and retry."); }
     if (file.name.toLowerCase().endsWith(".vdi")) {
         if (kind !== "disk")
             throw new Error("VDI images can only be attached as hard disks.");
