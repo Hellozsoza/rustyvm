@@ -23,7 +23,7 @@
         <button id="snapshot"><img src="./icons/snapshot_take_32px.png" alt="">Take Snapshot</button>
     </div>
     <main>
-        <aside><div class="sidebar-title">Tools <span>Local machines</span></div><div id="machines" role="listbox" aria-label="Virtual machines"></div><p class="storage-note">Stored on this browser, on this origin. Export important disks and states before clearing site data.</p></aside>
+        <aside><div class="sidebar-title">Tools <span>Local machines</span></div><div id="machines" role="listbox" aria-label="Virtual machines"></div><p class="storage-note">VM list and settings are stored in cookies; images and states use IndexedDB. Export important disks and states before clearing site data.</p></aside>
         <section class="workspace">
             <div class="tabbar" role="tablist"><button id="tab-details" role="tab" aria-selected="true">Details</button><button id="tab-console" role="tab" aria-selected="false">Console</button><button id="tab-snapshots" role="tab" aria-selected="false">Snapshots</button></div>
             <section id="details" class="panel"></section>
@@ -43,7 +43,8 @@
             <h2 id="editor-title">Create Virtual Machine</h2>
             <label>Name<input name="name" required maxlength="120" value="New machine"></label>
             <label>Operating system<select name="os"><option>Other</option><option>Linux</option><option>Windows</option></select></label>
-            <label>Base memory (MB)<input name="memory" type="number" min="16" max="512" step="1" value="64" required></label>
+            <label>Base memory (MB)<input name="memory" type="number" min="16" max="8192" step="1" value="64" required></label>
+            <p class="hint">Settings allow up to 8192 MB (8 GB). The current v86 engine can run up to 2047 MB; larger settings require another engine.</p>
             <label>Boot device<select name="boot"><option value="demo">Built-in x86 demo</option><option value="floppy">Floppy</option><option value="cdrom">Optical drive (ISO)</option><option value="disk">Hard disk (raw IMG / VDI)</option></select></label>
             <fieldset><legend>Storage media</legend>
                 <label>Floppy image<input name="floppy" type="file" accept=".img,.ima"></label>

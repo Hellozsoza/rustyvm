@@ -12,7 +12,7 @@
  */
 import test from "node:test";
 import assert from "node:assert/strict";
-import { validateConfig, vdiToRaw, readMedia } from "../app/model.mjs";
+import { validateConfig, validateRuntimeMemory, vdiToRaw, readMedia } from "../app/model.mjs";
 
 function vdi(type = 1) {
     const data = new ArrayBuffer(2048);
@@ -29,7 +29,12 @@ function vdi(type = 1) {
 test("validates memory bounds, boot devices and untrusted config", () => {
     const config = { name: "  Linux  ", os: "Linux", memory: 64, boot: "disk" };
     assert.equal(validateConfig(config).name, "Linux");
-    for (const memory of [0, 513, NaN, Infinity, 32.5, "64"])
+    for (const memory of [16, 512, 513, 2047, 8192])
+        assert.equal(validateConfig({ ...config, memory }).memory, memory);
+    validateRuntimeMemory(2047);
+    assert.throws(() => validateRuntimeMemory(2048), /at most 2047/);
+    assert.throws(() => validateRuntimeMemory(8192), /requires a different engine/);
+    for (const memory of [0, 8193, NaN, Infinity, 32.5, "64"])
         assert.throws(() => validateConfig({ ...config, memory }));
     for (const name of ["", " ", "x".repeat(121), null])
         assert.throws(() => validateConfig({ ...config, name }));

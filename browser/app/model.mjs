@@ -12,14 +12,22 @@
  * SPDX-License-Identifier: GPL-3.0-only
  */
 export const ENGINE_VERSION = "0.5.470";
+export const MAX_RAM_MB = 8192;
+// v86 clamps signed 32-bit RAM sizes; larger multiples can wrap to zero.
+export const ENGINE_MAX_RAM_MB = 2047;
+export function validateRuntimeMemory(memory) {
+    if (memory > ENGINE_MAX_RAM_MB)
+        throw new Error(`This v86 engine supports at most ${ENGINE_MAX_RAM_MB} MB guest RAM. The ${memory} MB setting is saved, but requires a different engine to run.`);
+}
+
 export const MAX_MEDIA_BYTES = 512 * 1024 * 1024;
 
 /** Validate untrusted configuration before allocating guest resources. */
 export function validateConfig(input) {
     if (!input || typeof input.name !== "string" || !input.name.trim() || input.name.length > 120)
         throw new Error("Name must contain 1–120 characters.");
-    if (!Number.isInteger(input.memory) || input.memory < 16 || input.memory > 512)
-        throw new Error("Memory must be an integer between 16 and 512 MB.");
+    if (!Number.isInteger(input.memory) || input.memory < 16 || input.memory > MAX_RAM_MB)
+        throw new Error("Memory must be an integer between 16 and 8192 MB.");
     if (!["Other", "Linux", "Windows"].includes(input.os))
         throw new Error("Unsupported operating system category.");
     if (!["demo", "floppy", "cdrom", "disk"].includes(input.boot))

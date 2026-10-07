@@ -12,7 +12,7 @@
  * SPDX-License-Identifier: GPL-3.0-only
  */
 import { V86 } from "./vendor/libv86.mjs";
-import { ENGINE_VERSION } from "./model.mjs";
+import { ENGINE_VERSION, validateRuntimeMemory } from "./model.mjs";
 
 async function fetchBytes(path) {
     const response = await fetch(path);
@@ -30,6 +30,7 @@ export class MachineRuntime {
     }
 
     async start(machine) {
+        validateRuntimeMemory(machine.config.memory);
         if (this.emulator)
             throw new Error("Power off the current VM before starting another.");
         if (machine.saved && machine.saved.version !== ENGINE_VERSION)

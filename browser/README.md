@@ -43,7 +43,7 @@ so the build uses curl with TLS verification enabled.
    and echoes PS/2 input. It is a hardware smoke test, not a bundled OS.
 2. Use **New** to create a VM. Select a boot device and attach your own compatible
    16/32-bit OS media. You can attach an installer ISO and a blank raw IDE disk
-   together. There is one emulated CPU, 16–512 MB RAM, and 8 MB VGA memory.
+   together. There is one emulated CPU, 16–8192 MB RAM settings (current engine runs up to 2047 MB), and 8 MB VGA memory.
 3. Click the guest display to capture keyboard/mouse input. Escape releases it.
    Text injection assumes the guest's US keyboard layout. Use Pause/Resume,
    Reset, Ctrl+Alt+Del, and Full Screen from the console toolbar.
@@ -63,7 +63,9 @@ Media is read locally and never uploaded. Disk writes persist on explicit
 Power Off, Save State, and snapshots. Tab closure, crashes, or clearing site data
 can lose unsaved writes; save before leaving. Browser storage quotas may prevent
 saves. Failed writes leave the running guest available for retry rather than
-closing it. Snapshots and configuration writes are atomic IndexedDB records.
+closing it. VM list and settings are stored in a persistent SameSite=Strict cookie (one-year lifetime); media, saved execution states, and snapshots remain in IndexedDB. Existing IndexedDB VM definitions migrate automatically. Cookies contain no image or saved-state bytes. The catalog is limited to 3800 encoded bytes; saves that exceed this capacity fail visibly without deleting existing VMs. Cookie metadata accompanies same-origin HTTP requests. Cookie and IndexedDB writes cannot form a single atomic transaction; failed IndexedDB writes restore the previous catalog.
+
+RAM settings support up to 8 GB. This pinned v86 engine uses signed 32-bit memory arithmetic and cannot provide 8 GB of guest RAM. Starting a VM configured above 2047 MB fails with an explicit message before any allocation; a different engine is needed to execute that configuration. Browser allocation limits may also prevent smaller VMs from starting.
 
 ## Compatibility and limits
 
@@ -73,8 +75,8 @@ closing it. Snapshots and configuration writes are atomic IndexedDB records.
 | Display | VGA and Bochs VBE; text and graphical canvas |
 | Storage | Local ISO, standard floppy, sector-aligned raw disks |
 | VDI | Standalone fixed/dynamic VDI 1.1 converted to raw; block mapping validated |
-| Persistence | Local machines, RAM/CPU state, media, snapshots, raw disk export |
-| RAM/media | 16–512 MB RAM; maximum 512 MB per image; full images held in memory |
+| Persistence | VM list/settings in cookies; IndexedDB for RAM/CPU state, media, snapshots, raw disk export |
+| RAM/media | 16–8192 MB RAM settings (current engine runs up to 2047 MB); maximum 512 MB per image; full images held in memory |
 | Guest networking | Disconnected; no NAT, relay, or bridged interface configured |
 | Unsupported | 64-bit, multicore, VT-x/AMD-V, USB/PCI passthrough, 3D acceleration |
 | Native integration | No VirtualBox Guest Additions, shared folders, host clipboard, XPCOM API |
